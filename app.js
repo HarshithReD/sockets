@@ -1,36 +1,19 @@
-const fs=require('fs');
-const os=require('os');
-var a=10;
 const variables=require('./variables.js');
+// variables.addNote(process.argv[2],process.argv[3]);
 var command=process.argv[2];
-var para1=process.argv[3];
-var para2=process.argv[4];
-
-if(command==='read'){
-	if(!para1){
-		process.exit(0);
-	}
-	fs.readFile(para1,'utf8',function(err,data){
-		if(err) throw err;
-		console.log(data);
-	});
-
-}else if(command === 'write'){
-	if(!para1 || !para2){
-		process.exit(0);
-	}
-	fs.writeFile(para1,para2,function(err){
-		if(err) throw err;
-		console.log('data has been writen');
-	});
+var par1=process.argv[3];
+var par2=process.argv[4];
+console.log('1.Add a note, 2.Get all notes ,3.Get a Particular note,4.Remove a particular note');
+if(command ==='1'){
+	addNote(par1,par2);
+	console.log('Note added');
+}else if(command ==='2'){
+	getAllNotes();
+	
+}else if(command ==='3'){
+	getNote(par1);
+	
+}else if(command ==='4'){
+	removeNote(par1);
+	console.log('Note Removed');
 }
-else if (command === 'append'){
-	if(!para1 || !para2){
-		process.exit(0);
-	}
-	fs.appendFile(para1,para2,function(err){
-		if(err) throw err;
-		console.log('data has been modified');
-	});
-}
-
